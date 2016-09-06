@@ -29,7 +29,7 @@ public class Util {
     }
 
     public int avg(int[] numbers) {
-        if (numbers.length == 0) {
+        if (numbers == null || numbers.length == 0 ) {
             return 0;
         }
         int sum = handleNumbers(numbers);

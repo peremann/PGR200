@@ -1,8 +1,6 @@
 package examples;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
@@ -31,6 +29,8 @@ public class UtilTest {
         util = new Util();
     }
 
+
+
     /**
      * Tears down the test fixture.
      * <p>
@@ -39,6 +39,8 @@ public class UtilTest {
     @After
     public void tearDown() {
     }
+
+
 
     @Test
     public void testAvgNormal() {
