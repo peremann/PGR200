@@ -1,4 +1,4 @@
-package main.mockito;
+package mockito;
 
 @SuppressWarnings("serial")
 public class InventoryException extends RuntimeException{

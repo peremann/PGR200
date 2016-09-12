@@ -1,4 +1,4 @@
-package test.mockito.assignment2;
+package mockito.assignment2;
 
 import main.mockito.assignment2.MailService;
 

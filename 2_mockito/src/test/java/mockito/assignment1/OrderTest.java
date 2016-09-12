@@ -1,4 +1,4 @@
-package test.mockito.assignment1;
+package mockito.assignment1;
 
 import org.junit.Test;
 
