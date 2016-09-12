@@ -1,4 +1,4 @@
-package main.mockito.assignment2;
+package mockito.assignment2;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;

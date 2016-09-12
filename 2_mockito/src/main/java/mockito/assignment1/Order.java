@@ -1,6 +1,6 @@
-package main.mockito.assignment1;
+package mockito.assignment1;
 
-import main.mockito.Warehouse;
+import mockito.Warehouse;
 
 
 public class Order {
