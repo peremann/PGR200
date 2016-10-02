@@ -1,4 +1,4 @@
-package main.mockito;
+package mockito;
 
 import java.util.HashMap;
 import java.util.Set;
