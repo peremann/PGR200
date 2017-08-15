@@ -29,9 +29,6 @@ public class Util {
     }
 
     public int avg(int[] numbers) {
-        if (numbers == null || numbers.length == 0 ) {
-            return 0;
-        }
         int sum = handleNumbers(numbers);
         return sum / numbers.length;
     }
