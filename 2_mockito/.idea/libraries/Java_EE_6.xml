@@ -1,11 +1,13 @@
 <component name="libraryTable">
   <library name="Java EE 6">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../workspaces/pg4100/mockitoExercises/lib/javax.mail-api-1.5.3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../workspaces/pg4100/mockitoExercises/lib/javax.servlet-api-3.1.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../workspaces/pg4100/mockitoExercises/lib/mockito-all-2.0.2-beta.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.mail-api-1.5.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.servlet-api-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mockito-all-2.0.2-beta.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/mockito-all-2.0.2-beta.jar!/" />
+    </SOURCES>
   </library>
 </component>

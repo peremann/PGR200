@@ -1,8 +1,8 @@
 package mockito.assignment2;
 
-import main.mockito.Warehouse;
-import main.mockito.assignment1.Order;
-import main.mockito.assignment2.OrderRevisitet;
+import mockito.Warehouse;
+import mockito.assignment1.Order;
+import mockito.assignment2.OrderRevisitet;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
