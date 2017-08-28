@@ -1,6 +1,6 @@
 package mockito.assignment2;
 
-import main.mockito.assignment2.MailService;
+import mockito.assignment2.MailService;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
