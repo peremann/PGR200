@@ -2,7 +2,6 @@ package mockito.assignment1;
 
 import mockito.Warehouse;
 
-
 public class Order {
 
 	private String productName;

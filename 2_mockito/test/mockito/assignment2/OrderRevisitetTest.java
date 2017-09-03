@@ -1,10 +1,14 @@
 package mockito.assignment2;
 
 import mockito.Warehouse;
+import mockito.WarehouseImpl;
 import mockito.assignment1.Order;
 import mockito.assignment2.OrderRevisitet;
 import org.junit.Test;
 
+import java.util.logging.Logger;
+
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyInt;
@@ -19,7 +23,14 @@ public class OrderRevisitetTest {
      * Assert that a mail is sent when the order is not filled.
      */
     public void mailSentIfOrderIsNotFilled() {
-        fail("Not implemented");
+        OrderRevisitet order = new OrderRevisitet("potato", 1);
+        Warehouse wh = new WarehouseImpl();
+        MailServiceStub mss = new MailServiceStub();
+        order.setMailService(mss);
+
+        order.fill(wh);
+
+        assertTrue(mss.getSent() == 1);
     }
 
     @Test
@@ -29,7 +40,15 @@ public class OrderRevisitetTest {
      * Assert that a mail is NOT sent when the order is filled.
      */
     public void mailNotSentWhenOrderIsFilled() {
-        fail("Not implemented");
+        OrderRevisitet order = new OrderRevisitet("potato", 1);
+        Warehouse wh = new WarehouseImpl();
+        MailServiceStub mss = new MailServiceStub();
+        order.setMailService(mss);
+        wh.add("potato", 1);
+
+        order.fill(wh);
+
+        assertTrue(mss.getSent() == 0);
     }
 
     @Test
@@ -39,7 +58,17 @@ public class OrderRevisitetTest {
      * when filling order is written to log.
      */
     public void runtimeExceptionOnFillIsWrittenToLog() {
-        fail("Not implemented");
+        OrderRevisitet order = new OrderRevisitet("potato", 1);
+        Warehouse wh = mock(WarehouseImpl.class);
+        Logger log = mock(Logger.class);
+        order.setLogger(log);
+        when(wh.hasInventory(anyString(), anyInt())).thenReturn(true);
+        doThrow(new RuntimeException()).when(wh).remove(anyString(), anyInt());
+
+        order.fill(wh);
+
+        assertFalse(order.isFilled());
+        verify(log).info(anyString());
     }
 
     @Test
@@ -49,7 +78,17 @@ public class OrderRevisitetTest {
      * when filling order is written to log.
      */
     public void runtimeExceptionOnFillIsWrittenToLogSpy() {
-        fail("Not implemented");
+        OrderRevisitet order = new OrderRevisitet("potato", 1);
+        Warehouse wh = spy(new WarehouseImpl());
+        when(wh.hasInventory(anyString(), anyInt())).thenReturn(true);
+        doThrow(new RuntimeException()).when(wh).remove(anyString(), anyInt());
+        Logger log = mock(Logger.class);
+        order.setLogger(log);
+
+        order.fill(wh);
+
+        assertFalse(order.isFilled());
+        verify(log).info(anyString());
     }
 
     @Test
@@ -62,9 +101,9 @@ public class OrderRevisitetTest {
     public void orderIsFilledWhenWarehouseCanProvide() {
         // ARRANGE
         Warehouse mockWarehouse = mock(Warehouse.class);
-        when(mockWarehouse.hasInventory("TALISKER", anyInt()))
+        when(mockWarehouse.hasInventory(anyString(), anyInt()))
                 .thenReturn(true);
-        Order order = new Order("TALISKER", 20);
+        Order order = new Order(anyString(), anyInt());
         // ACT
         order.fill(mockWarehouse);
         // ASSERT/VERIFY

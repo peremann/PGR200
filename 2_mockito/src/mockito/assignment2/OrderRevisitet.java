@@ -67,7 +67,6 @@ public class OrderRevisitet {
 	}
 	
 	public String returnStringMethod(){
-		JOptionPane.showMessageDialog(null, "What?!?");
 		return "dummy";
 	}
 

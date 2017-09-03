@@ -1,12 +1,13 @@
 package mockito.assignment1;
 
+import mockito.Warehouse;
+import mockito.WarehouseImpl;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class OrderTest {
 
@@ -18,7 +19,13 @@ public class OrderTest {
      * 		- verify that the order is filled
      */
     public void orderIsFilledWhenWarehouseCanProvide() {
-        fail("Not implemented");
+        Order order = new Order("potato", 1);
+        Warehouse wh = new WarehouseImpl();
+        wh.add("potato",1);
+
+        order.fill(wh);
+
+        assertTrue(order.isFilled());
     }
 
     @Test
@@ -29,7 +36,14 @@ public class OrderTest {
      * 		- verify that the inventory is updated accordingly
      */
     public void inventoryIsUpdatedWhenWarehouseFillsOrder() {
-        fail("Not implemented");
+        Order order = new Order("potato", 1);
+        Warehouse wh = new WarehouseImpl();
+        wh.add("potato",1);
+        int invStatus = wh.getInventory("potato");
+
+        order.fill(wh);
+
+        assertTrue((wh.getInventory("potato") < invStatus));
     }
 
     @Test
@@ -40,7 +54,12 @@ public class OrderTest {
      * 		- verify that the order is not filled
      */
     public void orderIsNotFilledWhenWarehouseFailsToProvide() {
-        fail("Not implemented");
+        Order order = new Order("potato", 1);
+        Warehouse wh = new WarehouseImpl();
+
+        order.fill(wh);
+
+        assertFalse(order.isFilled());
     }
 
     @Test
@@ -51,7 +70,14 @@ public class OrderTest {
      * 		- verify that the warehouse inventory has not changed
      */
     public void inventoryIsUnchangedWhenOrderIsNotFilled() {
-        fail("Not implemented");
+        Order order = new Order("potato", 3);
+        Warehouse wh = new WarehouseImpl();
+        wh.add("potato",1);
+        int i = wh.getInventory("potato");
+
+        order.fill(wh);
+
+        assertTrue(i == wh.getInventory("potato"));
     }
 
     @Test
@@ -63,7 +89,15 @@ public class OrderTest {
      * Also make sure the order status is filled.
      */
     public void warehouseShouldCheckInventoryAndUpdateQuantityWhenNeeded() {
-        fail("Not implemented");
+        Order order = new Order("potato", 3);
+        Warehouse wh = mock(WarehouseImpl.class);
+        when(wh.hasInventory(anyString(), anyInt())).thenReturn(true);
+
+        order.fill(wh);
+
+        verify(wh, atLeastOnce()).hasInventory(anyString(), anyInt());
+        verify(wh, atLeastOnce()).remove(anyString(), anyInt());
+        assertTrue(order.isFilled());
     }
 
     @Test
@@ -76,7 +110,15 @@ public class OrderTest {
      * Also make sure the order status is NOT filled.
      */
     public void warehouseShouldOnlyCheckInventoryWhenFillingIsImpossible() {
-        fail("Not implemented");
+        Order order = new Order("potato", 3);
+        Warehouse wh = mock(WarehouseImpl.class);
+        when(wh.hasInventory(anyString(), anyInt())).thenReturn(false);
+
+        order.fill(wh);
+
+        verify(wh, atLeastOnce()).hasInventory(anyString(), anyInt());
+        verify(wh, never()).remove(anyString(), anyInt());
+        assertFalse(order.isFilled());
     }
 
     @SuppressWarnings("rawtypes")
