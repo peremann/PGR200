@@ -33,6 +33,7 @@ public class RollbackExample {
                 }
                 con.commit();
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Handling exception, rolling back transaction");
                 con.rollback();
                 printNorway(con);
@@ -58,9 +59,9 @@ public class RollbackExample {
 
     private static void updateNorway(Connection con, String newName) throws Exception {
         try (Statement stmt = con.createStatement()) {
-            int res = stmt.executeUpdate("UPDATE country_copy SET name = '"
+            int res = stmt.executeUpdate("UPDATE country SET name = '"
                     + newName + "' WHERE code =  'NOR'");
-            System.out.println("Oppdaterte " + res + " byer.");
+            System.out.println("Oppdaterte " + res + " rader.");
         }
     }
 
@@ -68,7 +69,7 @@ public class RollbackExample {
             throws Exception {
         try (Statement stmt = con.createStatement();
              ResultSet res = stmt
-                     .executeQuery("select code, name, population from country_copy"
+                     .executeQuery("select code, name, population from country"
                              + " where code= 'NOR'")) {
             System.out
                     .println("------------------------------------------------------------------------");
