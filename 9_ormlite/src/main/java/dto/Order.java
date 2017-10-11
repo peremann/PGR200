@@ -31,6 +31,10 @@ public class Order {
 	}
 
 	public Order(Account account, int itemNumber, float price, int quantity) {
+		this.account = account;
+		this.itemNumber = itemNumber;
+		this.price = price;
+		this.quantity = quantity;
     }
 
 	public Order(String s, double v) {
